@@ -12,9 +12,9 @@
     "@azure/msal-browser": "3.22.0",
     "@vue-leaflet/vue-leaflet": "0.10.1",
     "leaflet": "1.9.4",
-    "nuxt": "3.12.4"
+    "nuxt": "3.19.0"
   },
   "devDependencies": {
-    "@playwright/test": "1.49.1"
+    "@playwright/test": "1.58.2"
   }
 }
