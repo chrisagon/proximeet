@@ -16,7 +16,7 @@ services:
       - SMTP_USER=${SMTP_USER:-}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-}
       - FRONTEND_URL=${FRONTEND_URL:-https://proximeet.hrconseil.net}
-      - RESEND_API_KEY=${RESEND_API_KEY:-re_DkiY4CPN_DGHpZb3dvnMEHQ7Vyb8uYFgK}
+      - RESEND_API_KEY=${RESEND_API_KEY:-Cle_API_Resend}
       - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-invitations@hrconseil.net}
     volumes:
       - proximeet-data:/data
