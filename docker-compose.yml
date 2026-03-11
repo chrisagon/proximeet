@@ -1,0 +1,38 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////data/proximeet.db
+      - ENTRA_TENANT_ID=${ENTRA_TENANT_ID:-common}
+      - ENTRA_CLIENT_ID=${ENTRA_CLIENT_ID:-}
+      - ENTRA_AUDIENCE=${ENTRA_AUDIENCE:-}
+      - ENTRA_ISSUER=${ENTRA_ISSUER:-}
+      - GOOGLE_PLACES_API_KEY=${GOOGLE_PLACES_API_KEY:-}
+      - ALLOW_ANONYMOUS=${ALLOW_ANONYMOUS:-false}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - FRONTEND_URL=${FRONTEND_URL:-https://proximeet.hrconseil.net}
+      - RESEND_API_KEY=${RESEND_API_KEY:-re_DkiY4CPN_DGHpZb3dvnMEHQ7Vyb8uYFgK}
+      - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-invitations@hrconseil.net}
+    volumes:
+      - proximeet-data:/data
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_API_BASE=${NUXT_PUBLIC_API_BASE:-http://localhost:8000}
+      - NUXT_PUBLIC_MSAL_CLIENT_ID=${NUXT_PUBLIC_MSAL_CLIENT_ID:-}
+      - NUXT_PUBLIC_MSAL_TENANT_ID=${NUXT_PUBLIC_MSAL_TENANT_ID:-common}
+      - NUXT_PUBLIC_MSAL_REDIRECT_URI=${NUXT_PUBLIC_MSAL_REDIRECT_URI:-http://localhost:3000}
+      - NUXT_PUBLIC_MSAL_SCOPES=${NUXT_PUBLIC_MSAL_SCOPES:-User.Read}
+      - NUXT_TELEMETRY_DISABLED=1
+    depends_on:
+      - backend
+
+volumes:
+  proximeet-data:
